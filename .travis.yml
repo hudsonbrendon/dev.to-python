@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.7"
+
+# command to install dependencies
+install:
+ - pip install pipenv
+ - pipenv install --dev
+
+after_success:
+- pipenv install codecov --dev
+- codecov
+
+# command to run tests
+script: make dev
