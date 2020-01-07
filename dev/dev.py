@@ -40,3 +40,17 @@ class DevTo(object):
         else:
             articles = requests.get(url=self._get_url(path=f'/articles/'))
         return articles.json()
+
+    def create_article(self, article):
+        '''
+        This endpoint allows the client to create a new article.
+        "Articles" are all the posts that users create on DEV that typically
+        show up in the feed. They can be a blog post, a discussion question, a
+        help thread etc. but is referred to as article within the code.
+
+        learn more at:
+
+        https://docs.dev.to/api/#operation/createArticle
+        '''
+        article = requests.post(url=self._get_url(path=f'/articles/'), json=article, headers=self._authentication())
+        return article.json()
