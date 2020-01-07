@@ -5,11 +5,14 @@ class DevTo(object):
 
     _URL = 'https://dev.to/api'
 
-    def __init__(self, token):
-        self._token = token
-
+    def __init__(self, api_key):
+        self._api_key = api_key
+        
     def _get_url(self, path):
         return f'{self._URL}{path}'
+
+    def _authentication(self):
+        return {'api_key': self._api_key}
 
     def articles(self, id=None):
         '''
@@ -26,10 +29,14 @@ class DevTo(object):
 
         learn more at:
 
-        https://docs.dev.to/api/#tag/articles
+        https://docs.dev.to/api/#operation/getArticles
+
+        and
+
+        https://docs.dev.to/api/#operation/getArticleById
         '''
         if id:
-            request = requests.get(url=self._get_url(path=f'/articles/{id}'))
+            articles = requests.get(url=self._get_url(path=f'/articles/{id}'))
         else:
-            request = requests.get(url=self._get_url(path=f'/articles/'))
-        return request.json()
+            articles = requests.get(url=self._get_url(path=f'/articles/'))
+        return articles.json()
