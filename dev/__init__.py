@@ -1,1 +1,1 @@
-from .dev import DevTo # noqa
+from .dev import DevTo  # noqa
